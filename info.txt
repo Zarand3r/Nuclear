@@ -1,0 +1,46 @@
+Cell Profiler was used to generate the output folder.
+The output folder contains the cropped out nuclei from each of the scans, organized by the label matching script into folders based on nuclear morphology.
+
+However, this output folder and cell profiler pipelines are not included in the GitHub repository, as it takes up too much space. 
+
+The ImageData folder is the training set for machine learning, and is derived from this output folder.
+
+
+TODO: Make scripts in image_clustering that can segment nuclei from the images and be used instead of cell profiler. 
+
+
+
+Data Processing: 
+================
+First use Cell Profiler to output nuclei images in a folder in Nuclear/output
+The csv containing geometric data should be outputted to Measurements folder
+The output folders should be according to the alphanumeric order of the corresponding image or psd scans
+Rename the folder and the nuclei file names with the functions in rename.py
+Add padding with rescale.py to give images uniform size
+Reorganize images with match_labels2
+You can use plot function in plot.py to view and verify label matching
+
+run process.py
+
+Unsupervised:
+=============
+Use model_data.py or model_data2.py to generate tsne and psd plots
+There is a concern that the tsne is overclusting locally due to the overwhelming dominance of unscarred nuclei in the data
+To reduce this, use equalize.py to create a new, reduced csv geometric data file of nuclei
+Feed this into model_data.py or model_data2.py
+
+implement isomap
+
+Supervised:
+===========
+To feed into tensorflow, need to convert data into tensorflow dataset
+Make code to write csv or npy file containing info of each image file and its corresponding label
+get.data.py will retrieve this info into two lists: image name, and label. Then it will map the image name to corresponding pixel array data,
+creating a dataset with these pixel arrays as one feature, and the label as the other feature
+Create an iterator to traverse this dataset
+Use the completed dataset as an input into tensorflow CNN or MLP code. 
+
+
+
+
+

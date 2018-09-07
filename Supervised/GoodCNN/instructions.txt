@@ -1,0 +1,14 @@
+python retrain.py \
+    --image_dir ../../ImageData\
+    --saved_model_dir=../Models/retrained2/
+
+python retrain.py \
+    --image_dir ~/flower_photos \
+    --tfhub_module https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/1
+
+python label_image.py --graph=/tmp/output_graph.pb --labels=/tmp/output_labels.txt --input_layer=Placeholder --output_layer=final_result --image=../Unknown/1.jpg
+
+
+python label_image.py --graph=../Models/retrained2/output_graph.pb --labels=../Models/retrained2/output_labels.txt --input_layer=Placeholder --output_layer=final_result --image=../Unknown/1.jpg
+
+
